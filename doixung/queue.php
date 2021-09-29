@@ -2,55 +2,29 @@
 
 class Queue
 {
-    protected $front;
-    protected $next;
+    public array $queue;
+    public int $limit;
 
-    public function __construct()
+    public function __construct(int $limit = 100)
     {
-        $this->front = null;
-        $this->next = null;
+        $this->queue = [];
+        $this->limit = $limit;
     }
 
-    private function readList(): array
+    public function enqueue($data)
     {
-        $listData = [];
-        $current = $this->front;
-
-        while (!is_null($current)) {
-            array_push($listData, $current->readNode());
-            $current = $current->next;
-        }
-        return $listData;
-    }
-
-    public function isEmpty()
-    {
-        return empty($this->readList());
-    }
-
-    public function enqueue($data): void
-    {
-        if (!is_null($this->front)) {
-            $node = new Node($data);
-            $this->next->next = $node;
-            $node->next = null;
-            $this->next = $node;
+        if ($this->limit > count($this->queue)) {
+            array_push($this->queue, $data);
         } else {
-            $node = new Node($data);
-            $node->next = $this->front;
-            $this->front = $node;
-
-            if (is_null($this->next)) {
-                $this->next = $node;
-            }
+            echo 'Patient list was full';
         }
     }
 
     public function dequeue()
     {
-        $data = $this->front->readNode();
-        $this->front = $this->front->next;
+        $data=$this->queue[0];
+        array_splice($this->queue, 0, 1);
         return $data;
     }
-}
 
+}
