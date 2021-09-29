@@ -14,13 +14,14 @@ class Linkedlist
     public function addPatient(object $Patient)
     {
         $current = $this->firstNode;
-        if ($this->firstNode == null) {
+        if ($this->firstNode == null ) {
             $this->insertFirst($Patient);
         }
         while (!is_null($current)) {
-            if (null == $current->next) {
+            if (null == $current->next ) {
                 $this->insertLast($Patient);
                 break;
+
             }
             if ($Patient->code < $current->next->code) {
                 $Patient->next = $current->next;
