@@ -23,8 +23,7 @@ class Linkedlist
                 break;
             }
             if ($Patient->code < $current->next->code) {
-                $next = $current->next;
-                $Patient->next = $next;
+                $Patient->next = $current->next;
                 $current->next = $Patient;
                 break;
             }
